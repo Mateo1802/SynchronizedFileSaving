@@ -32,6 +32,20 @@ namespace raion.Controllers
             }
         }
 
+        [HttpGet("savedata/sw")]
+        public async Task<SaveResponse> SaveDataSW([FromQuery] string text)
+        {
+            try
+            {
+                await _dataAccessService.SaveDataStreamWriter(text);
+                return new SaveResponse(true, "Text added.");
+            }
+            catch (Exception e)
+            {
+                return new SaveResponse(false, $"Text adding error. Exception catched: {e.ToString()}");
+            }
+        }
+
         [HttpGet("paralleltest")]
         public async Task Get()
         {
